@@ -329,7 +329,7 @@ int main(int argc, char **argv) {
 
     // We need to include files from both the source and object trees.
     ActiveIncludeOption =
-        ("-I" + ActiveIncludeDir + " " + "-I" + ActiveObjRoot + "/include");
+        ("\"-I" + ActiveIncludeDir + "\" " + "\"-I" + ActiveObjRoot + "/include\"");
   } else {
     ActivePrefix = CurrentExecPrefix;
     ActiveIncludeDir = ActivePrefix + "/include";
@@ -338,7 +338,7 @@ int main(int argc, char **argv) {
     ActiveBinDir = path.str();
     ActiveLibDir = ActivePrefix + "/lib" + LLVM_LIBDIR_SUFFIX;
     ActiveCMakeDir = ActiveLibDir + "/cmake/llvm";
-    ActiveIncludeOption = "-I" + ActiveIncludeDir;
+    ActiveIncludeOption = "\"-I" + ActiveIncludeDir + "\"";
   }
 
   /// We only use `shared library` mode in cases where the static library form
@@ -492,8 +492,8 @@ int main(int argc, char **argv) {
       } else if (Arg == "--cxxflags") {
         OS << ActiveIncludeOption << ' ' << LLVM_CXXFLAGS << '\n';
       } else if (Arg == "--ldflags") {
-        OS << ((HostTriple.isWindowsMSVCEnvironment()) ? "-LIBPATH:" : "-L")
-           << ActiveLibDir << ' ' << LLVM_LDFLAGS << '\n';
+        OS << "\"" << ((HostTriple.isWindowsMSVCEnvironment()) ? "-LIBPATH:" : "-L")
+           << ActiveLibDir << "\" " << LLVM_LDFLAGS << '\n';
       } else if (Arg == "--system-libs") {
         PrintSystemLibs = true;
       } else if (Arg == "--libs") {

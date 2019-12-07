@@ -60,7 +60,7 @@ if(LLVM_BUILD_LLVM_DYLIB)
     set(LIB_NAMES -Wl,--whole-archive ${LIB_NAMES} -Wl,--no-whole-archive)
     if (NOT LLVM_LINKER_IS_SOLARISLD AND NOT MINGW)
       # Solaris ld does not accept global: *; so there is no way to version *all* global symbols
-      set(LIB_NAMES -Wl,--version-script,${LLVM_LIBRARY_DIR}/tools/llvm-shlib/simple_version_script.map ${LIB_NAMES})
+      set(LIB_NAMES -Wl,--version-script,"${LLVM_LIBRARY_DIR}/tools/llvm-shlib/simple_version_script.map" ${LIB_NAMES})
     endif()
   elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
     set(LIB_NAMES -Wl,-all_load ${LIB_NAMES})

@@ -1738,7 +1738,7 @@ function(llvm_setup_rpath name)
     if(LLVM_LINKER_IS_GNULD)
       # $ORIGIN is not interpreted at link time by ld.bfd
       set_property(TARGET ${name} APPEND_STRING PROPERTY
-                   LINK_FLAGS " -Wl,-rpath-link,${LLVM_LIBRARY_OUTPUT_INTDIR} ")
+                   LINK_FLAGS " -Wl,-rpath-link,\"${LLVM_LIBRARY_OUTPUT_INTDIR}\" ")
     endif()
   else()
     return()
